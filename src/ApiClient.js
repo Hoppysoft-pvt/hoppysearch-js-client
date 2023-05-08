@@ -37,7 +37,7 @@ class ApiClient {
          * @default https://xbsbszzngd.execute-api.ap-south-1.amazonaws.com
          */
         // this.basePath = 'https://xbsbszzngd.execute-api.ap-south-1.amazonaws.com'.replace(/\/+$/, ''); (Pragyan)
-        this.basePath = `https://${indexId}.execute-api.ap-south-1.amazonaws.com`.replace(/\/+$/, '');
+        this.basePath = `https://${indexId}.hoppysearch.com`.replace(/\/+$/, '');
 
         /**
          * The authentication methods to be included for all API calls.

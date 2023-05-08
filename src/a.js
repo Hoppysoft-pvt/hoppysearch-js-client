@@ -1,6 +1,6 @@
 const HoppySearch = require("./index")
 
-var api = new HoppySearch("xbsbszzngd", "hs_f3vrd6tqwzcc01oh")
+var api = new HoppySearch("lucene-serverless", "hs_f3vrd6tqwzcc01oh")
 
 // // clearIndex
 // // =============================================================
