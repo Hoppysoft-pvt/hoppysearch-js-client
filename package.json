@@ -1,6 +1,6 @@
 {
   "name": "hoppysearch",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Hoppysearch Search JavaScript Client",
   "license": "Unlicense",
   "main": "src/index.js",

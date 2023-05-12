@@ -6,8 +6,7 @@ var api = new HoppySearch("lucene-serverless", "hs_f3vrd6tqwzcc01oh")
 // // =============================================================
 // api.clearIndex()
 //     .then(res => {
-//         console.log('statusCode:', res.status);
-//         console.log('response text:', res.body);
+//         console.log('response text:', res);
 //     })
 //     .catch(err => {
 //         console.log(err)
@@ -25,8 +24,7 @@ var api = new HoppySearch("lucene-serverless", "hs_f3vrd6tqwzcc01oh")
 // }
 // api.delete(hs_guid, optionals)
 //     .then(res => {
-//         console.log('statusCode:', res.status);
-//         console.log('response text:', res.body);
+//         console.log('response text:', res);
 //     })
 //     .catch(err => {
 //         console.log(err)
@@ -34,13 +32,11 @@ var api = new HoppySearch("lucene-serverless", "hs_f3vrd6tqwzcc01oh")
 // // without optionals
 // api.delete(hs_guid)
 //     .then(res => {
-//         console.log('statusCode:', res.status);
-//         console.log('response text:', res.body);
+//         console.log('response text:', res);
 //     })
 //     .catch(err => {
 //         console.log(err)
 //     })
-
 
 
 // // index
@@ -59,14 +55,14 @@ var api = new HoppySearch("lucene-serverless", "hs_f3vrd6tqwzcc01oh")
 //         "Text": "These are the best cookies I have found that are gluten free.  I love them!"
 //     }
 // ]
+// documents = "C:/Users/Pragyan/Desktop/books.json"
 // optionals = {
 //     configType: "create",
 //     diag: "true"
 // }
 // api.index(documents, optionals)
 //     .then(res => {
-//         console.log('statusCode:', res.status);
-//         console.log('response text:', res.body);
+//         console.log('response text:', res);
 //     })
 //     .catch(err => {
 //         console.log(err)
@@ -74,8 +70,7 @@ var api = new HoppySearch("lucene-serverless", "hs_f3vrd6tqwzcc01oh")
 // // without optionals
 // api.index(documents, optionals)
 //     .then(res => {
-//         console.log('statusCode:', res.status);
-//         console.log('response text:', res.body);
+//         console.log('response text:', res);
 //     })
 //     .catch(err => {
 //         console.log(err)
@@ -95,8 +90,7 @@ var api = new HoppySearch("lucene-serverless", "hs_f3vrd6tqwzcc01oh")
 // }
 // api.search(query, optionals)
 //     .then(res => {
-//         console.log('statusCode:', res.status);
-//         console.log('response text:', res.body);
+//         console.log('response text:', res);
 //     })
 //     .catch(err => {
 //         console.log(err)
@@ -104,8 +98,7 @@ var api = new HoppySearch("lucene-serverless", "hs_f3vrd6tqwzcc01oh")
 // // without optionals
 // api.search(query)
 //     .then(res => {
-//         console.log('statusCode:', res.status);
-//         console.log('response text:', res.body);
+//         console.log('response text:', res);
 //     })
 //     .catch(err => {
 //         console.log(err)
@@ -126,8 +119,7 @@ var api = new HoppySearch("lucene-serverless", "hs_f3vrd6tqwzcc01oh")
 // }
 // api.luceneSearch(luceneQuery, optionals)
 //     .then(res => {
-//         console.log('statusCode:', res.status);
-//         console.log('response text:', res.body);
+//         console.log('response text:', res);
 //     })
 //     .catch(err => {
 //         console.log(err)
@@ -135,8 +127,7 @@ var api = new HoppySearch("lucene-serverless", "hs_f3vrd6tqwzcc01oh")
 // // without optionals
 // api.luceneSearch(luceneQuery)
 //     .then(res => {
-//         console.log('statusCode:', res.status);
-//         console.log('response text:', res.body);
+//         console.log('response text:', res);
 //     })
 //     .catch(err => {
 //         console.log(err)
@@ -148,8 +139,7 @@ var api = new HoppySearch("lucene-serverless", "hs_f3vrd6tqwzcc01oh")
 // // ========================================================================
 // api.stats()
 //     .then(res => {
-//         console.log('statusCode:', res.status);
-//         console.log('response text:', res.body);
+//         console.log('response text:', res);
 //     })
 //     .catch(err => {
 //         console.log(err)

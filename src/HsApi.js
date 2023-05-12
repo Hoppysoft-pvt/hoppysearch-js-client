@@ -30,134 +30,143 @@ class HsApi extends GeneralApi {
             super.v1ClearIndexDelete((err, data, res) => {
                 if (err) {
                     if (err.status === 403) {
-                        throw new Error('Please make sure you are using API Key with write permission.');
+                        reject(new Error('Please make sure you are using an API Key with write permission.'));
+                    } else {
+                        reject(err);
                     }
-                    reject(err);
                 } else {
-                    resolve(res);
+                    resolve(res.body);
                 }
             });
         });
     }
 
     delete(hs_guid, optionals) {
-        if (!hs_guid) {
-            throw new Error('Please pass your hs_guid as first argument.');
-        }
-        if (typeof hs_guid !== 'string') {
-            throw new Error('Your first argument "hs_guid" should be of type "string".');
-        }
-        unknownField(['diag', 'showStats'], optionals)
-        const opts = {
-            body: {
-                hs_guid
-            },
-            diag: optionals?.diag || false,
-            showStats: optionals?.diag || false
-        }
-
         return new Promise((resolve, reject) => {
+            if (!hs_guid) {
+                reject(new Error('Please pass your hs_guid as the first argument.'));
+                return;
+            }
+
+            if (typeof hs_guid !== 'string') {
+                reject(new Error('Your first argument "hs_guid" should be of type "string".'));
+                return;
+            }
+            unknownField(['diag', 'showStats'], optionals)
+            const opts = {
+                body: {
+                    hs_guid
+                },
+                diag: optionals?.diag || false,
+                showStats: optionals?.diag || false
+            }
             super.v1DeletePost(opts, (err, data, res) => {
                 if (err) {
                     if (err.status === 403) {
-                        throw new Error('Please make sure you are using API Key with write permission.');
+                        reject(new Error('Please make sure you are using an API Key with write permission.'));
+                    } else {
+                        reject(err);
                     }
-                    reject(err);
                 } else {
-                    resolve(res);
+                    resolve(res.body);
                 }
             });
         });
     }
 
     index(documents, optionals) {
-        if (!documents) {
-            throw new Error('Please pass your data which you want to index.');
-        }
-        if (!Array.isArray(documents)) {
-            throw new Error('Your first argument should be of type "Array"');
-        }
-        unknownField(['diag', 'configType'], optionals)
-        const opts = {
-            body: {
-                documents,
-                config: {
-                    type: optionals?.configType || "append"
-                }
-            },
-            diag: optionals?.diag || false
-        }
-
         return new Promise((resolve, reject) => {
+            if (!documents) {
+                reject(new Error('Please pass your data which you want to index.'));
+            }
+            if (!Array.isArray(documents) && typeof documents !== 'string' && !(documents instanceof io.IOBase)) {  
+                reject(new Error('Please ensure that the first argument is of the correct datatype. It can either be a list (for direct data upload), a string (for upload through a filepath), or an io.IOBase object (for upload through a file object).'));    
+            }
+            if (typeof documents === "string") {
+                documents = require(documents);
+            }
+            unknownField(['diag', 'configType'], optionals)
+            const opts = {
+                body: {
+                    documents,
+                    config: {
+                        type: optionals?.configType || "append"
+                    }
+                },
+                diag: optionals?.diag || false
+            }
+        
             super.v1IndexPost(opts, (err, data, res) => {
                 if (err) {
                     if (err.status === 403) {
-                        throw new Error('Please make sure you are using API Key with write permission.');
+                        reject(new Error('Please make sure you are using an API Key with write permission.'));
+                    } else {
+                        reject(err);
                     }
-                    reject(err);
                 } else {
-                    resolve(res);
+                    resolve(res.body);
                 }
             });
         });
     }
 
     search(query, optionals) {
-        if (!query) {
-            throw new Error('Please pass your query as first argument.');
-        }
-        if (typeof query !== 'string') {
-            throw new Error('Your first argument "query" should be of type "string".');
-        }
-        unknownField(['diag', 'showStats', 'pageIndex', 'pageIndex', 'searchableKeyList'], optionals)
-        const opts = {
-            q: query,
-            keyList: optionals?.searchableKeyList || "",
-            diag: optionals?.diag || false,
-            showStats: optionals?.showStats || false,
-            pageSize: optionals?.pageSize || 50,
-            pageIndex: optionals?.pageIndex || 0
-        }
         return new Promise((resolve, reject) => {
+            if (!query) {
+                reject(new Error('Please pass your query as first argument.'));
+                return;
+            }
+            if (typeof query !== 'string') {
+                reject(new Error('Your first argument "query" should be of type "string".'));
+            }
+            unknownField(['diag', 'showStats', 'pageIndex', 'pageIndex', 'searchableKeyList'], optionals)
+            const opts = {
+                q: query,
+                keyList: optionals?.searchableKeyList || "",
+                diag: optionals?.diag || false,
+                showStats: optionals?.showStats || false,
+                pageSize: optionals?.pageSize || 50,
+                pageIndex: optionals?.pageIndex || 0
+            }
             super.v1SearchGet(opts, (err, data, res) => {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(res);
+                    resolve(res.body);
                 }
             });
         });
     }
 
     luceneSearch(luceneQuery, optionals) {
-        if (!luceneQuery) {
-            throw new Error('Please pass your luceneQuery as first argument.');
-        }
-        if (typeof luceneQuery !== 'string') {
-            throw new Error('Your first argument "luceneQuery" should be of type "string".');
-        }
-        unknownField(['defaultKeyNameToBeSearch', 'analyzerClass', 'diag', 'showStats', 'pageIndex', 'pageIndex'], optionals)
-        const opts = {
-            body: {
-                luceneQuery
-            },
-            diag: optionals?.diag || false,
-            showStats: optionals?.showStats || false,
-            pageSize: optionals?.pageSize || 50,
-            pageIndex: optionals?.pageIndex || 0
-        }
-        if (optionals?.defaultKeyNameToBeSearch) {
-            opts.body.defaultKeyNameToBeSearch = optionals?.defaultKeyNameToBeSearch
-        }
-        if (optionals?.analyzerClass) {
-            opts.body.analyzerClass = optionals?.analyzerClass
-        }
         return new Promise((resolve, reject) => {
+            if (!luceneQuery) {
+                reject(new Error('Please pass your luceneQuery as first argument.'));
+            }
+            if (typeof luceneQuery !== 'string') {
+                reject(new Error('Your first argument "luceneQuery" should be of type "string".'));
+            }
+            unknownField(['defaultKeyNameToBeSearch', 'analyzerClass', 'diag', 'showStats', 'pageIndex', 'pageIndex'], optionals)
+            const opts = {
+                body: {
+                    luceneQuery
+                },
+                diag: optionals?.diag || false,
+                showStats: optionals?.showStats || false,
+                pageSize: optionals?.pageSize || 50,
+                pageIndex: optionals?.pageIndex || 0
+            }
+            if (optionals?.defaultKeyNameToBeSearch) {
+                opts.body.defaultKeyNameToBeSearch = optionals?.defaultKeyNameToBeSearch
+            }
+            if (optionals?.analyzerClass) {
+                opts.body.analyzerClass = optionals?.analyzerClass
+            }
             super.v1SearchPost(opts, (err, data, res) => {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(res);
+                    resolve(res.body);
                 }
             });
         });
@@ -169,7 +178,7 @@ class HsApi extends GeneralApi {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(res);
+                    resolve(res.body);
                 }
             });
         });
